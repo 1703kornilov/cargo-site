@@ -1,0 +1,5 @@
+# Адрес сайта. Когда купите настоящий домен, замените его здесь и выполните: docker compose restart caddy
+cargotest.duckdns.org {
+	encode gzip
+	reverse_proxy app:8000
+}

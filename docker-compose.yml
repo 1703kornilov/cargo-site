@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - appdata:/data        # здесь лежит база с пользователями и историей
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data     # сертификаты https
+      - caddy_config:/config
+    depends_on:
+      - app
+volumes:
+  appdata:
+  caddy_data:
+  caddy_config:
